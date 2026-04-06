@@ -53,11 +53,11 @@ export default function Contact() {
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
         >
           <div className="flex items-center gap-4 mb-2">
             <h2 className="text-4xl md:text-5xl font-black text-white">INITIATE_CONTACT</h2>
-            <div className="h-[2px] flex-grow bg-neon-blue max-w-xs shadow-[0_0_10px_#00f3ff]"></div>
+            <div className="h-[2px] grow bg-neon-blue max-w-xs shadow-[0_0_10px_#00f3ff]"></div>
           </div>
           <p className="text-gray-400 mb-12 font-mono uppercase tracking-widest text-sm">Awaiting connection protocol...</p>
         </motion.div>
@@ -67,7 +67,7 @@ export default function Contact() {
           <motion.div 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{ delay: 0.2 }}
             className="w-full lg:w-2/3 bg-dark-surface/60 border border-white/10 p-8 md:p-12 backdrop-blur-md relative overflow-hidden"
           >
@@ -153,15 +153,15 @@ export default function Contact() {
             <div className="bg-dark-surface/30 border-l border-white/20 p-6 hover:border-neon-pink transition-all duration-300 group">
               <h4 className="text-white font-bold mb-4 uppercase tracking-widest text-sm group-hover:text-neon-pink transition-colors">Social Network</h4>
               <div className="flex gap-4">
-                <a href="#" className="p-3 bg-dark-bg border border-white/10 hover:border-neon-pink hover:text-neon-pink text-gray-400 transition-all duration-300">
+                <motion.a whileHover={{ rotate: 360, scale: 1.1 }} href="#" className="p-3 bg-dark-bg border border-white/10 hover:border-neon-pink hover:text-neon-pink text-gray-400 transition-all duration-300">
                   <Code size={20} />
-                </a>
-                <a href="#" className="p-3 bg-dark-bg border border-white/10 hover:border-neon-blue hover:text-neon-blue text-gray-400 transition-all duration-300">
+                </motion.a>
+                <motion.a whileHover={{ rotate: 360, scale: 1.1 }} href="#" className="p-3 bg-dark-bg border border-white/10 hover:border-neon-blue hover:text-neon-blue text-gray-400 transition-all duration-300">
                   <Globe size={20} />
-                </a>
-                <a href="#" className="p-3 bg-dark-bg border border-white/10 hover:border-neon-purple hover:text-neon-purple text-gray-400 transition-all duration-300">
+                </motion.a>
+                <motion.a whileHover={{ rotate: 360, scale: 1.1 }} href="#" className="p-3 bg-dark-bg border border-white/10 hover:border-neon-purple hover:text-neon-purple text-gray-400 transition-all duration-300">
                   <MessageCircle size={20} />
-                </a>
+                </motion.a>
               </div>
             </div>
           </motion.div>

@@ -28,27 +28,92 @@
 }
 
 /* Base styling */
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background-color: var(--color-dark-bg);
+  background-color: #000;
   color: white;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Deep Space Gradient Layer */
+.space-gradient {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -20;
+  background: linear-gradient(135deg, #050010, #1a0033, #000000, #050010);
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Scanlines */
-.scanlines::before {
+.scanlines {
   content: "";
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: repeating-linear-gradient(0deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);
   pointer-events: none;
-  z-index: 999;
+  z-index: 9998;
+}
+
+/* Vignette Overlay */
+.vignette {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle, transparent 60%, rgba(0,0,0,0.8) 100%);
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Center Glow & Lens Flare Overlay */
+.lens-flare {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 9997;
+  mix-blend-mode: screen;
+}
+
+/* Loader Animation */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(0, 243, 255, 0.2);
+  border-top-color: #00f3ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.5);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* Chromatic aberration */
@@ -62,7 +127,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-dark-bg);
+  background: #000;
 }
 ::-webkit-scrollbar-thumb {
   background: var(--color-dark-surface);

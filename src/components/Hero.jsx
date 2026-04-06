@@ -22,7 +22,8 @@ export default function Hero() {
       <div className="z-10 text-center px-4 max-w-5xl mx-auto pointer-events-auto mt-20">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h2 className="text-neon-pink font-mono mb-4 tracking-widest text-lg uppercase shadow-neon-pink">System Initialization complete</h2>
@@ -30,7 +31,8 @@ export default function Hero() {
         
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <h1 className="text-6xl md:text-8xl font-black mb-6 glitch-text tracking-tighter">
@@ -40,7 +42,8 @@ export default function Hero() {
 
         <motion.div
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <p className="text-xl md:text-3xl text-gray-400 mb-10 font-light border-l-4 border-neon-blue pl-4 inline-block text-left">
@@ -51,23 +54,26 @@ export default function Hero() {
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-6"
         >
-          <button 
-            onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth' })}
-            className="px-8 py-4 bg-transparent border border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-dark-bg hover:shadow-[0_0_20px_#00f3ff] transition-all duration-300 font-bold tracking-widest uppercase w-full sm:w-auto text-sm"
+          <motion.button 
+            whileHover={{ y: -2, boxShadow: '0 0 20px #00f3ff' }}
+            onClick={() => document.getElementById('projects').scrollIntoView({ behavior: 'smooth', block: 'start' })}
+            className="px-8 py-4 bg-transparent border border-neon-blue text-neon-blue hover:bg-neon-blue hover:text-dark-bg transition-all duration-300 font-bold tracking-widest uppercase w-full sm:w-auto text-sm"
           >
             Explore Core
-          </button>
+          </motion.button>
           
-          <button 
+          <motion.button 
+            whileHover={{ y: -2, boxShadow: '0 0 20px #ff00aa' }}
             onClick={downloadResume}
-            className="px-8 py-4 bg-transparent border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-dark-bg hover:shadow-[0_0_20px_#ff00aa] transition-all duration-300 font-bold tracking-widest uppercase w-full sm:w-auto text-sm"
+            className="px-8 py-4 bg-transparent border border-neon-pink text-neon-pink hover:bg-neon-pink hover:text-dark-bg transition-all duration-300 font-bold tracking-widest uppercase w-full sm:w-auto text-sm"
           >
             Extract Data (Resume)
-          </button>
+          </motion.button>
         </motion.div>
       </div>
       

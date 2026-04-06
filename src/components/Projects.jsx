@@ -25,7 +25,7 @@ export default function Projects() {
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           variants={containerVariants}
         >
           <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-black mb-2 text-white text-right">
@@ -38,9 +38,9 @@ export default function Projects() {
               <motion.div 
                 key={project.id} 
                 variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -10 }}
+                whileHover={{ scale: 1.05, y: -10, boxShadow: '0 0 25px rgba(0, 243, 255, 0.4)', borderColor: '#00f3ff' }}
                 onClick={() => setSelectedProject(project)}
-                className="group cursor-pointer bg-dark-surface/80 border border-white/10 overflow-hidden hover:border-neon-blue/50 transition-all duration-300 relative backdrop-blur-md"
+                className="group cursor-pointer bg-dark-surface/80 border border-white/10 overflow-hidden transition-all duration-300 relative backdrop-blur-md"
               >
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-dark-bg/90 z-10 pointer-events-none"></div>
                 <div className="h-64 overflow-hidden relative">

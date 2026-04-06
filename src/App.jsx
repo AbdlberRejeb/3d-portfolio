@@ -1,6 +1,6 @@
 import { Suspense, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { ScrollControls, Scroll } from '@react-three/drei';
+import { motion, useScroll, useSpring } from 'framer-motion';
 import Scene3D from './components/Scene3D';
 import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
@@ -22,40 +22,52 @@ function CheckWebGLFallback() {
 }
 
 export default function App() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
   return (
-    <div className="w-full h-screen bg-dark-bg text-white overflow-hidden scanlines relative font-sans">
+    <div className="w-full min-h-screen text-white relative font-sans">
       <CheckWebGLFallback />
+      
+      {/* Background and Overlays */}
+      <div className="space-gradient"></div>
+      <div className="lens-flare"></div>
+      <div className="vignette"></div>
+      <div className="scanlines"></div>
+      
+      {/* Scroll Progress Bar */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-1 bg-neon-blue origin-left z-50 shadow-[0_0_15px_#00f3ff]"
+        style={{ scaleX }}
+      />
       
       <Suspense fallback={<LoadingScreen />}>
         {/* Fixed Navbar on top of everything */}
         <Navbar />
 
-        {/* 3D Canvas bridging background and scroll logic */}
-        <Canvas 
-          className="absolute inset-0 block pointer-events-auto"
-          style={{ zIndex: 0 }}
-          camera={{ position: [0, 0, 10], fov: 50 }}
-          dpr={[1, 2]} // Optimize pixel ratio
-        >
-          {/* ScrollControls manages both 3D useScroll tracking and HTML scrolling overlay */}
-          <ScrollControls pages={6} damping={0.2} distance={1}>
-            
-            {/* The 3D Scene which uses the useScroll camera hook */}
-            <Scene3D />
+        {/* Fixed 3D Canvas bridging background and scroll logic */}
+        <div className="fixed inset-0 z-[-10] pointer-events-auto">
+          <Canvas 
+            camera={{ position: [0, 2, 12], fov: 50 }}
+            dpr={[1, 2]}
+            gl={{ alpha: true, antialias: true }}
+          >
+            <Scene3D scrollYProgress={scrollYProgress} />
+          </Canvas>
+        </div>
 
-            {/* DOM Overlay synchronized with ScrollControls */}
-            <Scroll html style={{ width: '100vw' }}>
-              <div className="flex flex-col">
-                <Hero />
-                <About />
-                <Projects />
-                <Skills />
-                <Contact />
-              </div>
-            </Scroll>
-            
-          </ScrollControls>
-        </Canvas>
+        {/* DOM Overlay synchronized via native layout */}
+        <div className="relative z-10 w-full flex flex-col pointer-events-auto">
+          <Hero />
+          <About />
+          <Projects />
+          <Skills />
+          <Contact />
+        </div>
       </Suspense>
     </div>
   );

@@ -21,7 +21,7 @@ export default function About() {
         <motion.div 
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, amount: 0.2 }}
           variants={containerVariants}
         >
           <motion.h2 variants={itemVariants} className="text-4xl md:text-5xl font-black mb-2 text-white">
